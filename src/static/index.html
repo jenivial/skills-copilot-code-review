@@ -10,8 +10,11 @@
 </head>
 
 <body>
-  <div class="announcement-banner">
-    📢 Activity registration is open until the end of the month. Don't miss your spot!
+  <div id="announcement-banner" class="announcement-banner hidden" role="status" aria-live="polite">
+    <div class="announcement-inner">
+      <div class="announcement-title">Announcements</div>
+      <div id="announcement-items" class="announcement-items"></div>
+    </div>
   </div>
   <header>
     <h1>Mergington High School</h1>
@@ -27,6 +30,10 @@
           <button id="logout-button">Logout</button>
         </div>
       </div>
+      <button id="manage-announcements-button" class="icon-button hidden" aria-label="Manage announcements">
+        <span class="user-icon">📣</span>
+        <span>Announcements</span>
+      </button>
     </div>
   </header>
 
@@ -132,6 +139,54 @@
         <button type="submit">Login</button>
       </form>
       <div id="login-message" class="hidden message"></div>
+    </div>
+  </div>
+
+  <!-- Announcements Modal -->
+  <div id="announcements-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="announcements-title">
+    <div class="modal-content announcements-modal-content">
+      <span class="close-announcements-modal" role="button" aria-label="Close announcements dialog">&times;</span>
+      <h3 id="announcements-title">Manage Announcements</h3>
+      <div class="announcements-modal-body">
+        <div class="announcements-panel">
+          <div class="panel-header">
+            <h4>Existing announcements</h4>
+            <button id="refresh-announcements" class="ghost-button" type="button">Refresh</button>
+          </div>
+          <div id="announcements-list" class="announcements-list"></div>
+        </div>
+        <div class="announcements-panel">
+          <h4 id="announcement-form-title">Add announcement</h4>
+          <form id="announcement-form">
+            <div class="form-group">
+              <label for="announcement-message">Message</label>
+              <textarea id="announcement-message" rows="3" required placeholder="Share an update for students and families"></textarea>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="announcement-start-date">Start date (optional)</label>
+                <input type="date" id="announcement-start-date" />
+              </div>
+              <div class="form-group">
+                <label for="announcement-end-date">Expiration date</label>
+                <input type="date" id="announcement-end-date" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="announcement-level">Tone</label>
+              <select id="announcement-level">
+                <option value="info">Info</option>
+                <option value="success">Good news</option>
+                <option value="warning">Important</option>
+              </select>
+            </div>
+            <div class="form-actions">
+              <button id="announcement-submit" type="submit">Save announcement</button>
+              <button id="announcement-cancel" class="ghost-button hidden" type="button">Cancel edit</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 
